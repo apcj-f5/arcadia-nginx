@@ -9,5 +9,5 @@ before_script:
 build:
   stage: build
   script:
-    - docker build -t registry.gitlab.com/arcadia-application/nginx/nginxoss .
-    - docker push registry.gitlab.com/arcadia-application/nginx/nginxoss
+    - docker build -t registry.gitlab.com/arcadia-application/nginx/nginxoss:latest .
+    - docker push registry.gitlab.com/arcadia-application/nginx/nginxoss:latest
