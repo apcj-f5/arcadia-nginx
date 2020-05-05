@@ -1,7 +1,7 @@
 # Start the NGINX+ Container
 resource "docker_container" "NginxPlusWebApp" {
   name  = "NginxPlusWebApp"
-  image = "nginxcontr32rc4:latest"
+  image = "nginx-plus:34rc3"
   ports {
     internal = "${lookup(var.int_port, var.env)}"
     external = "${lookup(var.ext_port, var.env)}"
@@ -13,6 +13,9 @@ resource "docker_container" "NginxPlusWebApp" {
     ip = "${lookup(var.ext_ip_Web, var.env)}"
   }
   restart = "always"
+  dns = ["172.17.0.1"]
+  dns_search = ["nginx-udf.internal"]
+  hostname = "WebApp"
   host {
     host = "controller.nginx-udf.internal"
     ip = "10.1.20.11"
@@ -21,7 +24,7 @@ resource "docker_container" "NginxPlusWebApp" {
 
 resource "docker_container" "NginxPlusAPI" {
   name  = "NginxPlusAPI"
-  image = "nginxcontr32rc4:latest"
+  image = "nginx-plus:34rc3"
   ports {
     internal = "${lookup(var.int_port, var.env)}"
     external = "${lookup(var.ext_port, var.env)}"
@@ -33,6 +36,9 @@ resource "docker_container" "NginxPlusAPI" {
     ip = "${lookup(var.ext_ip_API, var.env)}"
   }
   restart = "always"
+  dns = ["172.17.0.1"]
+  dns_search = ["nginx-udf.internal"]
+  hostname = "API"
   host {
     host = "controller.nginx-udf.internal"
     ip = "10.1.20.11"
